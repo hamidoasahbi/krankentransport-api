@@ -1,14 +1,11 @@
 # distance_matrix.py
 
-import os
 import requests
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")  # sichere Methode
+# Dein Google Maps API-Key (für Testzwecke direkt hier)
+GOOGLE_API_KEY = "AIzaSyANtlq-97oTsQsgFk9lO1i8yV8T5q5pR2I"
 
 def get_distance_matrix(fahrten):
-    if not GOOGLE_API_KEY:
-        raise ValueError("Google Maps API Key fehlt. Setze Umgebungsvariable 'GOOGLE_MAPS_API_KEY'.")
-
     addresses = [f["adresse"] for f in fahrten]
     ids = [f["id"] for f in fahrten]
 
@@ -49,4 +46,3 @@ def get_distance_matrix(fahrten):
         "distances": result,
         "status": "ok"
     }
-
