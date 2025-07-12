@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 from math import radians, cos, sin, asin, sqrt
 
+# Importiere deine Distanz-Matrix Funktion aus distance_matrix.py
+from distance_matrix import get_distance_matrix
+
 app = Flask(__name__)
 
 def haversine(lat1, lon1, lat2, lon2):
@@ -27,6 +30,13 @@ def fahrten():
         "anzahl_fahrten": len(fahrten),
         "cluster": cluster
     })
+
+@app.route("/distance-matrix", methods=["POST"])
+def distance_matrix():
+    data = request.get_json()
+    fahrten = data.get("fahrten", [])
+    result = get_distance_matrix(fahrten)
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
