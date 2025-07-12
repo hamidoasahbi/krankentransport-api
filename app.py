@@ -15,6 +15,10 @@ def haversine(lat1, lon1, lat2, lon2):
     a = sin(dlat / 2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon / 2)**2
     return R * 2 * asin(sqrt(a))
 
+@app.route('/')
+def index():
+    return "API läuft!"
+
 @app.route('/fahrten', methods=['POST'])
 def fahrten():
     data = request.get_json()
