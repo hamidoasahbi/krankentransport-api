@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from math import radians, cos, sin, asin, sqrt
+import os  # für Umgebungsvariablen
 
 # Importiere deine Distanz-Matrix Funktion aus distance_matrix.py
 from distance_matrix import get_distance_matrix
@@ -39,4 +40,5 @@ def distance_matrix():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get('PORT', 10000))  # Port von Render, Standard 10000
+    app.run(host='0.0.0.0', port=port)
