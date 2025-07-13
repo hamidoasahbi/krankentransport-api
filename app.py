@@ -9,6 +9,16 @@ app = Flask(__name__)
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
+# Neue Root-Route für Health-Check oder Doku
+@app.route("/")
+def index():
+    return jsonify({
+        "message": "Krankentransport API läuft 🚀",
+        "endpoints": {
+            "/distance-matrix": "POST - JSON: { 'adressen': ['Adresse1', 'Adresse2', ...] }"
+        }
+    })
+
 @app.route("/distance-matrix", methods=["POST"])
 def distance_matrix():
     data = request.get_json()
