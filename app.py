@@ -1,10 +1,13 @@
 from flask import Flask, request, jsonify
 import requests
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-GOOGLE_API_KEY = os.getenv("AIzaSyANtlq-97oTsQsgFk9lO1i8yV8T5q5pR2I")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 @app.route("/distance-matrix", methods=["POST"])
 def distance_matrix():
@@ -21,7 +24,7 @@ def distance_matrix():
     params = {
         "origins": origins,
         "destinations": destinations,
-        "key": AIzaSyANtlq-97oTsQsgFk9lO1i8yV8T5q5pR2I,
+        "key": GOOGLE_API_KEY,
         "language": "de",
         "region": "de",
         "departure_time": "now"
